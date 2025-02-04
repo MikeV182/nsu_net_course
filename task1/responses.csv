@@ -1,0 +1,11 @@
+web_adress,rtt_min (ms),rtt_avg (ms),rtt_max (ms)
+google.com,105.033,166.523,251.315
+stackoverflow.com,124.493,159.478,204.251
+github.com,203.934,226.747,250.181
+yahoo.com,301.672,325.745,349.899
+yandex.ru,146.751,192.570,226.837
+wix.com,215.097,228.111,245.999
+wikipedia.org,165.817,194.113,212.817
+play2048.co,204.255,214.008,227.879
+pointerpointer.com,204.101,216.066,228.031
+discord.com,192.544,215.320,238.380
