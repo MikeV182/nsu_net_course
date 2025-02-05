@@ -1,22 +1,21 @@
+import csv
+import subprocess
+import re
+
+hostnames = [
+    "google.com",
+    "stackoverflow.com",
+    "github.com",
+    "yahoo.com",
+    "yandex.ru",
+    "wix.com",
+    "wikipedia.org",
+    "play2048.co",
+    "pointerpointer.com",
+    "discord.com",
+]
+
 try:
-    import csv
-    import subprocess
-    import re
-
-
-    hostnames = [
-        "google.com",
-        "stackoverflow.com",
-        "github.com",
-        "yahoo.com",
-        "yandex.ru",
-        "wix.com",
-        "wikipedia.org",
-        "play2048.co",
-        "pointerpointer.com",
-        "discord.com",
-    ]
-
     with open("responses.csv", "w", encoding="UTF8") as f:
         writer = csv.writer(f)
         writer.writerow([
@@ -32,6 +31,6 @@ try:
 
             writer.writerow([hostname, timings[0], timings[1], timings[2]])
             print(f"Pinging {hostname}: [DONE]\n")
-
+            
 except KeyboardInterrupt:
     print("Keyboard interrupt from a user: [OK]")
