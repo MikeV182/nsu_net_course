@@ -2,6 +2,7 @@ import csv
 import subprocess
 import re
 
+
 hostnames = [
     "google.com",
     "stackoverflow.com",

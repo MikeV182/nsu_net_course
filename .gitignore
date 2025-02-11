@@ -1,3 +1,5 @@
 # IDE folders
 .vscode
 
+# Python cache dir
+__pycache__
