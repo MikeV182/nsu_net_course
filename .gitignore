@@ -3,3 +3,6 @@
 
 # Python cache dir
 __pycache__
+
+# Developer config
+dev_config.json
