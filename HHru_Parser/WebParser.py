@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-with open("dev_config.json", "r", encoding="utf-8") as file:
+with open("config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
 LOGIN = config["login"]
 PASSWORD = config["password"]
