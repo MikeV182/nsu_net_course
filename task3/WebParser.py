@@ -12,13 +12,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-with open("config.json", "r", encoding="utf-8") as file:
+with open("dev_config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
 LOGIN = config["login"]
 PASSWORD = config["password"]
 
 options = Options()
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_argument("--window-size=1920,1080")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -27,21 +27,43 @@ driver = webdriver.Chrome(service=service, options=options)
 
 def login():
     driver.get("https://novosibirsk.hh.ru/account/login")
-    time.sleep(3)
+    time.sleep(5)
     
+    login_button = driver.find_element(
+        By.XPATH,
+        '/html/body/div[5]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/div \
+        /div/div/div/div/div/form/div/div[3]/button[1]')
+    login_button.click()
+    time.sleep(3)
+
+    email_label = driver.find_element(
+        By.XPATH,
+        '/html/body/div[5]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/div \
+        /div/div/div/div/div/form/div/div/div[2]/label[2]')
+    email_label.click()
+    time.sleep(3)
+
     email_input = driver.find_element(By.NAME, "username")
     email_input.send_keys(LOGIN)
-    email_input.send_keys(Keys.RETURN)
     
-    time.sleep(2)  # Ожидание загрузки пароля
+    login_with_password = driver.find_element(
+        By.XPATH,
+        '/html/body/div[5]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/div \
+        /div/div/div/div/div/form/div/div/div[6]/button[2]')
+    login_with_password.click()
+    time.sleep(3)
     
     password_input = driver.find_element(By.NAME, "password")
     password_input.send_keys(PASSWORD)
-    password_input.send_keys(Keys.RETURN)
     
-    time.sleep(5)  # Даем время на авторизацию
+    enter_button = driver.find_element(
+        By.XPATH,
+        '/html/body/div[5]/div/div[1]/div[4]/div/div/div/div[1]/div/div/div/div \
+        /div/div/div/div/div/form/div/div/div[5]/button[1]')
+    enter_button.click()
 
-# Функция парсинга одной страницы
+    time.sleep(5)
+
 def parse_page():
     vacancies = []
     cards = driver.find_elements(By.CLASS_NAME, "vacancy-serp-item")
@@ -59,7 +81,6 @@ def parse_page():
             print("Ошибка при парсинге карточки:", e)
     return vacancies
 
-# Функция пагинации
 def parse_vacancies():
     url = "https://novosibirsk.hh.ru/search/vacancy?text=Python"
     driver.get(url)
@@ -83,7 +104,6 @@ def parse_vacancies():
     
     return all_vacancies
 
-# Функция сохранения в CSV
 def save_to_csv(vacancies, filename="vacancies.csv"):
     with open(filename, "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
@@ -91,7 +111,6 @@ def save_to_csv(vacancies, filename="vacancies.csv"):
         writer.writerows(vacancies)
     print(f"Данные сохранены в {filename}")
 
-# Основной процесс
 login()
 vacancies = parse_vacancies()
 save_to_csv(vacancies)
