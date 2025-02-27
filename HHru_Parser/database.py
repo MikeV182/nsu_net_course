@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-with open("dev_config.json", "r", encoding="utf-8") as file:
+with open("config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
 DB_USERNAME = config["db_username"]
 DB_PASSWORD = config["db_password"]
