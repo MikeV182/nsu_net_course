@@ -14,7 +14,6 @@ from database import SessionLocal, Vacancy
 app = FastAPI()
 
 
-# Функция для получения сессии БД
 def get_db():
     db = SessionLocal()
     try:
