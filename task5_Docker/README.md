@@ -16,6 +16,10 @@ docker build -t fastapi-app .
 docker run --name fastapi-app --link postgres-db:db -p 11111:11111 -d fastapi-app
 
 
+docker build -t nginx-app -f nginx-Dockerfile .
+docker run --name nginx-container --link fastapi-app:fastapi-app -p 80:80 -d nginx-app
+
+
 # to see all running containers
 docker ps
 # to stop a container
