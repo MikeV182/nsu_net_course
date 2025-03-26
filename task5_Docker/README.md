@@ -29,4 +29,8 @@ docker rm <id-of-container>
 ifconfig
 # Узнать внешний адресс своей машины
 curl ifconfig.me
+
+
+# For testing purposes
+cloudflared tunnel --url http://localhost:80   
 ```
