@@ -14,6 +14,9 @@ docker build -t fastapi-app .
 docker run --name fastapi-app --link postgres-db:db -p 11111:11111 -d fastapi-app
 
 
+service nginx stop
+
+
 docker build -t nginx-app -f nginx-Dockerfile .
 docker run --name nginx-container --link fastapi-app:fastapi-app -p 80:80 -d nginx-app
 
@@ -22,6 +25,8 @@ docker ps # to see all running containers
 docker stop <id-of-container>  
 docker rm <id-of-container>
 
-
-ipconfig (Win) || ifconfig (Linux)
+# Local address
+ifconfig
+# Узнать внешний адресс своей машины
+curl ifconfig.me
 ```
